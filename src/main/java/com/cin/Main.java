@@ -1,3 +1,5 @@
+package main.java.com.cin;
+
 public class Main {
 
     public static void main(String[] args) {

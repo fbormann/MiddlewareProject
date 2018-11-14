@@ -1,4 +1,6 @@
 FROM java:8
 WORKDIR /
-ADD app.jar app.jar
-CMD java - jar app.jar
+COPY . /
+RUN javac -cp ./src/main/java ./src/main/java/com/cin/*.java -d ./out/
+RUN jar cvfm Main.jar ./src/main/resources/META-INF/MANIFEST.MF -C ./out/ .
+RUN java -jar ./Main.jar
