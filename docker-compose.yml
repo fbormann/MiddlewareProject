@@ -6,14 +6,21 @@ services:
     image: postgres:latest
     ports:
     - "8010:5432"
-  web:
+  server:
+    environment:
+    - appoption=server
     build:
       context: .
-    volumes:
-    - .:/code
     ports:
     - "8000:8000"
     depends_on:
     - db
+    stdin_open: true
+    tty: true
+  client:
+    environment:
+      - appoption=client
+    build:
+      context: .
     stdin_open: true
     tty: true
