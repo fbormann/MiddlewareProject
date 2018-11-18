@@ -3,6 +3,7 @@ package main.java.distribuicao;
 import main.java.distribuicao.criptografia.Cripto;
 import main.java.distribuicao.criptografia.ICripto;
 import main.java.distribuicao.message.Message;
+import main.java.infraEstrutura.EstoquePostgres;
 import main.java.infraEstrutura.EstoqueSQLite;
 import main.java.infraEstrutura.IRequestHandler;
 import main.java.infraEstrutura.tcp.TcpServerRequestHandler;
@@ -15,7 +16,7 @@ public class Invoker {
 		ICripto cripto = new Cripto();
 		
 		Termination termination = new Termination(null);
-		EstoqueSQLite estoque = new EstoqueSQLite();
+		EstoquePostgres estoque = new EstoquePostgres();
 		Message msgUncripted = null;
 		IRequestHandler srh = new TcpServerRequestHandler(client.getPort());
 
