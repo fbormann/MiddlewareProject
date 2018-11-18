@@ -1,5 +1,6 @@
 package main.java.infraEstrutura;
 
+import java.lang.StringBuilder;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;

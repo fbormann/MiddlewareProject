@@ -51,4 +51,14 @@ public class Message implements Serializable {
 		this.operationResult = operationResult;
 	}
 	
+
+	@Override
+	public String toString() {
+		if(parameters != null && parameters.size()>0 && parameters.get(0)!=null) {
+			return operation+" "+parameters.get(0).toString()+". isResponse= "+(operationResult!=null);
+		} else {
+			return operation;
+		}
+	}
+	
 }

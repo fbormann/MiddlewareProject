@@ -1,15 +1,11 @@
 package main.java.infraEstrutura.tcp;
 
 import main.java.infraEstrutura.IRequestHandler;
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 
-public class TcpClientRequestHandler implements IRequestHandler {
 
+public class TcpClientRequestHandler implements IRequestHandler {
 	private Socket socket;
 	private DataOutputStream socketOut;
 	private BufferedReader socketIn;
@@ -40,22 +36,25 @@ public class TcpClientRequestHandler implements IRequestHandler {
 	public void send(byte[] data) throws Exception {
 		socketOut.write(data);
 		socketOut.flush();
-		System.out.println("sent");
 	}
 
 	@Override
 	public byte[] receive() throws Exception {
 		System.out.println("trying to receive client");
-		byte[] buffer = new byte[100*1024];
-		socket.getInputStream().read(buffer);
-		System.out.println("read");
-		return buffer;
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		int bufferMaxSize = 1024;
+		byte[] content = new byte[ bufferMaxSize ];  
+		int bytesRead = bufferMaxSize;  
+		while(bytesRead == bufferMaxSize ) {  
+			bytesRead = socket.getInputStream().read(content);
+			baos.write( content, 0, bytesRead ); 
+		} // while 
+		return baos.toByteArray();
 	}
 	
 	public void closeConnection() throws IOException{
 		System.out.println("cliente fechou");
 		socket.close();
-		socketIn.close();
 		socketOut.close();
 	}
 

@@ -2,7 +2,6 @@ package main.java.aplicacao;
 
 import main.java.distribuicao.EstoqueProxy;
 import main.java.infraEstrutura.IClient;
-
 import java.util.Scanner;
 
 public class AppClient implements IClient {
@@ -25,6 +24,11 @@ public class AppClient implements IClient {
 				case "add":
 					client.add(msgArray[1]);
 					break;
+				case "remove":
+					client.remove(msgArray[1]);
+					break;
+				case "list":
+					client.list();
 				default:
 					break;
 				}

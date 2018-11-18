@@ -6,6 +6,8 @@ import main.java.infraEstrutura.IEstoque;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+
+
 public class EstoqueProxy extends ClientProxy implements IEstoque {
 	private static final long serialVersionUID = 1L;
 
@@ -41,6 +43,13 @@ public class EstoqueProxy extends ClientProxy implements IEstoque {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return ((Message) result.getResult()).getOperationResult().toString();
+
+		Message responseMessage = ((Message) result.getResult());
+		if(responseMessage.getOperationResult() == null) {
+			return "Mensagem vazia";
+		} else {
+			return responseMessage.getOperationResult().toString();
+		}
+		
 	}
 }

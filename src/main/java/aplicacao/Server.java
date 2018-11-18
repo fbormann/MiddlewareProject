@@ -4,6 +4,7 @@ import main.java.distribuicao.ClientProxy;
 import main.java.distribuicao.EstoqueProxy;
 import main.java.distribuicao.Invoker;
 
+
 public class Server {
 	public static void main(String[] args) {
 		System.out.println("Running the server app");

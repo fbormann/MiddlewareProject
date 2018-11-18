@@ -1,7 +1,6 @@
 package main.java.infraEstrutura.tcp;
 
 import main.java.infraEstrutura.IClient;
-
 import java.util.Scanner;
 
 public class ClientTcp implements IClient {

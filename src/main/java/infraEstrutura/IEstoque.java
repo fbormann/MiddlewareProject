@@ -2,6 +2,7 @@ package main.java.infraEstrutura;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+
 public interface IEstoque extends Remote {
 	
 	String add(String item) throws RemoteException;

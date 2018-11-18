@@ -2,10 +2,7 @@ package main.java.infraEstrutura.tcp;
 
 import main.java.infraEstrutura.IRequestHandler;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -34,13 +31,16 @@ public class TcpServerRequestHandler implements IRequestHandler {
 
 	@Override
 	public byte[] receive() throws Exception {
-		socketIn = new BufferedReader(new InputStreamReader(
-    			socket.getInputStream()));
 		System.out.println("trying to receive");
-		while (!socketIn.ready());
-		byte[] buffer = new byte[100*1024];
-		socket.getInputStream().read(buffer);
-		return buffer;
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();  
+		int bufferMaxSize = 1024;
+		byte[] content = new byte[ bufferMaxSize ];  
+		int bytesRead = bufferMaxSize;  
+		while(bytesRead == bufferMaxSize ) {  
+			bytesRead = socket.getInputStream().read(content);
+			baos.write( content, 0, bytesRead ); 
+		} // while 
+		return baos.toByteArray();
 	}
 	
 	public String[] receiveAsStringArray() throws Exception{
@@ -53,7 +53,6 @@ public class TcpServerRequestHandler implements IRequestHandler {
 		System.out.println("server fechou");
 		socket.close();
 //		welcomeSocket.close();
-		socketIn.close();
 		socketOut.close();
 	}
 
