@@ -12,11 +12,26 @@ public class AppClient implements IClient {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println("Running the client app");
-
 		try {
+			Authentication auth = new Authentication();
+			boolean loggedin = false;
+			while(!loggedin) {
+				Scanner sc = new Scanner(System.in);
+				System.out.print("User: ");
+				String login = sc.nextLine();
+				System.out.print("Password: ");
+				String password = sc.nextLine();
+				
+				loggedin = auth.signin(login, password);
+				
+				if(!loggedin) System.out.println("User or password is wrong");
+				
+				System.out.println();
+			}
+			
 			AppClient client = new AppClient();
 			Scanner scanner = new Scanner(System.in);
+			System.out.println("Running the client app");
 			while(true){
 				String msg = scanner.nextLine();
 				String[] msgArray = msg.split(" ");
