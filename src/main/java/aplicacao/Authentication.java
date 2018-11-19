@@ -67,7 +67,7 @@ public class Authentication {
 		this.stmt = this.c.createStatement();
 
 		String sql = "INSERT INTO USERS (login, password) VALUES\n" + 
-				"  ('"+ login +"', crypt('"+ password +"', gen_salt('bf', 8)));";
+				"  (lower('"+ login +"'), crypt('"+ password +"', gen_salt('bf', 8)));";
 		int response = this.stmt.executeUpdate(sql);
 		
 		stmt.close();
