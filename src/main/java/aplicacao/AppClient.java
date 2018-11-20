@@ -2,17 +2,22 @@ package main.java.aplicacao;
 
 import main.java.distribuicao.EstoqueProxy;
 import main.java.infraEstrutura.IClient;
+import main.java.naming.NamingProxy;
+
 import java.util.Scanner;
 
 public class AppClient implements IClient {
 	static EstoqueProxy proxy;
 	
 	public AppClient(){
-		proxy = new EstoqueProxy("localhost", 2000, 1234);
+//		proxy = new EstoqueProxy("localhost", 2000, 1234);
 	}
 	
 	public static void main(String[] args) {
 		try {
+			NamingProxy namingProxy = new NamingProxy("localhost", 2224);
+			proxy = (EstoqueProxy) namingProxy.lookUp("Estoque");
+
 			Authentication auth = new Authentication();
 			int state = MenuStateMachine.MENU_STATE;
 			String login, password;

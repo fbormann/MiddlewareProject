@@ -1,14 +1,12 @@
-package main.java.infraEstrutura;
+package main.java.infraEstrutura.db;
 
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
-public class EstoquePostgres extends UnicastRemoteObject implements IEstoque {
+public class EstoquePostgres {
 	/**
 	 * 
 	 */
@@ -21,7 +19,7 @@ public class EstoquePostgres extends UnicastRemoteObject implements IEstoque {
 	Connection c;
 	Statement stmt;
 	
-	public EstoquePostgres() throws RemoteException {
+	public EstoquePostgres() {
 		this.c = null;
 		this.stmt = null;
 
@@ -78,8 +76,7 @@ public class EstoquePostgres extends UnicastRemoteObject implements IEstoque {
     	}
     }
     
-	@Override
-	public String remove(String produto) throws RemoteException {
+	public String remove(String produto) {
 		boolean response = false;
 		int qtd = 0;		
 		try {       
@@ -102,8 +99,7 @@ public class EstoquePostgres extends UnicastRemoteObject implements IEstoque {
 		
 	}
 
-	@Override
-	public String getAll() throws RemoteException {
+	public String getAll() {
 		try {
 			this.c = this.getConnection(false);
             return DBUtil.list(c);

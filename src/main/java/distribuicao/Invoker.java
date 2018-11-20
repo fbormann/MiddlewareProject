@@ -4,10 +4,9 @@ import main.java.distribuicao.criptografia.Cripto;
 import main.java.distribuicao.criptografia.ICripto;
 import main.java.distribuicao.criptografia.Marshaller;
 import main.java.distribuicao.message.Message;
-import main.java.infraEstrutura.EstoquePostgres;
-import main.java.infraEstrutura.EstoqueSQLite;
+import main.java.infraEstrutura.db.EstoquePostgres;
 import main.java.infraEstrutura.IRequestHandler;
-import main.java.infraEstrutura.tcp.TcpServerRequestHandler;
+import main.java.infraEstrutura.ServerRequestHandler;
 
 public class Invoker {
 	public void invoke(ClientProxy client) throws Exception {
@@ -19,7 +18,7 @@ public class Invoker {
 		Termination termination = new Termination(null);
 		EstoquePostgres estoque = new EstoquePostgres();
 		Message msgUncripted = null;
-		IRequestHandler srh = new TcpServerRequestHandler(client.getPort());
+		IRequestHandler srh = new ServerRequestHandler(client.getPort());
 
 		while(true) {
 			srh.create();
