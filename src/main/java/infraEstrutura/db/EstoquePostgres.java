@@ -12,7 +12,8 @@ public class EstoquePostgres {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public static final String POSTGRES_URL = "jdbc:postgresql://localhost/postgres";
+	//public static final String POSTGRES_URL = "jdbc:postgresql://localhost/postgres";
+	public static final String POSTGRES_URL = "jdbc:postgresql://db:5432/postgres";
 	public static final String ADMIN = "postgres";
 	public static final String PASSWORD = "admin";
 	
