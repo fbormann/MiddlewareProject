@@ -9,6 +9,7 @@ import main.java.infraEstrutura.tcp.TcpClientRequestHandler;
 
 public class Requestor {
 	public Termination invoke(Invocation inv) throws Exception{
+		System.out.println("Message being sent to: " + "host: "+ inv.getHost() + "port: " + inv.getPort());
 		IRequestHandler crh = new TcpClientRequestHandler(inv.getHost(), inv.getPort());
 		crh.create();
 

@@ -12,15 +12,19 @@ services:
     build:
       context: .
     ports:
-    - "8000:8000"
+    - "2000"
     depends_on:
     - db
-    stdin_open: true
-    tty: true
   client:
     environment:
       - appoption=client
     build:
       context: .
+    ports:
+      - "2000"
     stdin_open: true
     tty: true
+    depends_on:
+      - server
+    links:
+      - server

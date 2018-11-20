@@ -34,6 +34,7 @@ public class EstoqueProxy extends ClientProxy implements IEstoque {
 	public String sendCommand(String command, String item) {
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(item);
+		System.out.println("Invocation sent");
 		Invocation inv = new Invocation(super.getObjectId(), super.getHost(), super.getPort(), command, parameters);
 		Requestor req = new Requestor();
 		Termination result = null;

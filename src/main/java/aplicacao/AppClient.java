@@ -7,10 +7,13 @@ import java.util.Scanner;
 public class AppClient implements IClient {
 	static EstoqueProxy proxy;
 	
-	public AppClient(){
+/*	public AppClient(){
 		proxy = new EstoqueProxy("localhost", 2000, 1234);
+	}*/
+	public AppClient(){
+		proxy = new EstoqueProxy("server", 2000, 1234);
 	}
-	
+
 	public static void main(String[] args) {
 		System.out.println("Running the client app");
 
@@ -19,6 +22,7 @@ public class AppClient implements IClient {
 			Scanner scanner = new Scanner(System.in);
 			while(true){
 				String msg = scanner.nextLine();
+				System.out.println("msg: " + msg);
 				String[] msgArray = msg.split(" ");
 				switch (msgArray[0]) {
 				case "add":

@@ -39,7 +39,8 @@ public class Client implements IClient {
 	}
 	
 	public static void main(String[] args)
-			throws RemoteException, MalformedURLException, NotBoundException  { 
+			throws RemoteException, MalformedURLException, NotBoundException  {
+		System.out.println("the client is run too");
 		int port = 12345;
 		String host = String.format("//127.0.0.1:%1$d/Estoque", port);
 		Client client = new Client(host);
@@ -48,6 +49,7 @@ public class Client implements IClient {
         while(true) {
     		String fullLine = in.nextLine();
     		String[] command = fullLine.split(" ");
+    		System.out.println(command.toString());
     		if (command[0].equals("add")) {
         		client.add(command[1]);
         	} else if(command[0].equals("remove")){
