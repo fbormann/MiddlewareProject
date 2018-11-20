@@ -2,6 +2,7 @@ package main.java.distribuicao;
 
 import main.java.distribuicao.criptografia.Cripto;
 import main.java.distribuicao.criptografia.ICripto;
+import main.java.distribuicao.criptografia.Marshaller;
 import main.java.distribuicao.message.Message;
 import main.java.infraEstrutura.IRequestHandler;
 import main.java.infraEstrutura.tcp.TcpClientRequestHandler;
