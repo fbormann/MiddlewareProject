@@ -15,8 +15,8 @@ public class EstoquePostgres extends UnicastRemoteObject implements IEstoque {
 	private static final long serialVersionUID = 1L;
 	
 	public static final String POSTGRES_URL = "jdbc:postgresql://localhost/postgres";
-	public static final String ADMIN = "";
-	public static final String PASSWORD = "";
+	public static final String ADMIN = "postgres";
+	public static final String PASSWORD = "admin";
 	
 	Connection c;
 	Statement stmt;
