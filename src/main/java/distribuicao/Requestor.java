@@ -2,15 +2,16 @@ package main.java.distribuicao;
 
 import main.java.distribuicao.criptografia.Cripto;
 import main.java.distribuicao.criptografia.ICripto;
+import main.java.distribuicao.criptografia.Marshaller;
 import main.java.distribuicao.message.Message;
 import main.java.infraEstrutura.IRequestHandler;
-import main.java.infraEstrutura.tcp.TcpClientRequestHandler;
+import main.java.infraEstrutura.ClientRequestHandler;
 
 
 public class Requestor {
 	public Termination invoke(Invocation inv) throws Exception{
 		System.out.println("Message being sent to: " + "host: "+ inv.getHost() + "port: " + inv.getPort());
-		IRequestHandler crh = new TcpClientRequestHandler(inv.getHost(), inv.getPort());
+		IRequestHandler crh = new ClientRequestHandler(inv.getHost(), inv.getPort());
 		crh.create();
 
 		Marshaller marshaller = new Marshaller();

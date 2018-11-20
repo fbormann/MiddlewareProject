@@ -2,16 +2,21 @@ package main.java.distribuicao.message;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Message implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private int requestId;
 	private String operation;
-	private ArrayList<Object> parameters;
+	private List<Object> parameters;
 	private Object operationResult;
-	
-	public Message(int requestId, String operation, ArrayList<Object> parameters, Object operationResult) {
+
+	public Message(String operation,  List<Object> parameters) {
+		this(-1, operation, parameters, null);
+	}
+
+	public Message(int requestId, String operation, List<Object> parameters, Object operationResult) {
 		super();
 		this.requestId = requestId;
 		this.operation = operation;
@@ -35,7 +40,7 @@ public class Message implements Serializable {
 		this.operation = operation;
 	}
 
-	public ArrayList<Object> getParameters() {
+	public List<Object> getParameters() {
 		return parameters;
 	}
 

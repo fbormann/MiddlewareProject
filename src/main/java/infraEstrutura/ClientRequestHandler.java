@@ -1,17 +1,17 @@
-package main.java.infraEstrutura.tcp;
+package main.java.infraEstrutura;
 
 import main.java.infraEstrutura.IRequestHandler;
 import java.io.*;
 import java.net.Socket;
 
 
-public class TcpClientRequestHandler implements IRequestHandler {
+public class ClientRequestHandler implements IRequestHandler {
 	private Socket socket;
 	private DataOutputStream socketOut;
 	private BufferedReader socketIn;
 	private String host;
 	private int port;
-	public TcpClientRequestHandler(String host, int port) throws Exception{
+	public ClientRequestHandler(String host, int port) throws Exception{
 		this.host = host;
 		this.port = port;
 		
