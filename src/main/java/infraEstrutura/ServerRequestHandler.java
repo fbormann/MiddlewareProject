@@ -1,4 +1,4 @@
-package main.java.infraEstrutura.tcp;
+package main.java.infraEstrutura;
 
 import main.java.infraEstrutura.IRequestHandler;
 
@@ -6,14 +6,14 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class TcpServerRequestHandler implements IRequestHandler {
+public class ServerRequestHandler implements IRequestHandler {
 
 	BufferedReader socketIn;
 	DataOutputStream socketOut;
 	Socket socket;
 	ServerSocket welcomeSocket;
 	
-	public TcpServerRequestHandler(int port) throws Exception{
+	public ServerRequestHandler(int port) throws Exception{
 		welcomeSocket = new ServerSocket(port);
 	}
 	
