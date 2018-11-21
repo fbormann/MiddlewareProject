@@ -5,7 +5,19 @@ services:
     restart: always
     image: postgres:latest
     ports:
-    - "8010:5432"
+    - "5432:5432"
+  naming_server:
+    environment:
+    - appoption=naming_server
+    build:
+      context: .
+    ports:
+    - "2224"
+    - "2000"
+    stdin_open: true
+    tty: true
+    depends_on:
+    - db
   server:
     environment:
     - appoption=server
@@ -13,18 +25,18 @@ services:
       context: .
     ports:
     - "2000"
+    - "2224"
     depends_on:
-    - db
+    - naming_server
   client:
     environment:
       - appoption=client
     build:
       context: .
     ports:
-      - "2000"
+    - "2000"
+    - "2224"
     stdin_open: true
     tty: true
     depends_on:
-      - server
-    links:
       - server

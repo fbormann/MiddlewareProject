@@ -1,5 +1,7 @@
 package main.java.infraEstrutura.db;
 
+import main.java.aplicacao.Environment;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -11,19 +13,19 @@ public class EstoquePostgres {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	public static final String POSTGRES_URL = "jdbc:postgresql://localhost/postgres";
-	//public static final String POSTGRES_URL = "jdbc:postgresql://db:5432/postgres";
-	public static final String ADMIN = "postgres";
-	public static final String PASSWORD = "admin";
-	
+//	public static final String POSTGRES_URL = "jdbc:postgresql://localhost/postgres";
+	public static final String POSTGRES_URL = "jdbc:postgresql://db:5432/postgres";
+
+  public static String ADMIN;
+  public static String PASSWORD;
 	Connection c;
 	Statement stmt;
 	
 	public EstoquePostgres() {
 		this.c = null;
 		this.stmt = null;
-
+        ADMIN = Environment.getInstance().getLoginDbKey();
+        PASSWORD = Environment.getInstance().getPasswordDbKey();
 		try {
 			Class.forName("org.postgresql.Driver");
 			
@@ -95,6 +97,7 @@ public class EstoquePostgres {
             } else {
                 return "Produto " + produto + " nao esta cadastrado";
             }
+			this.c.close();
        } catch (Exception e) {
             // TODO: handle exception
         	e.printStackTrace();
@@ -110,7 +113,9 @@ public class EstoquePostgres {
 	public String getAll() {
 		try {
 			this.c = this.getConnection(false);
-            return DBUtil.list(c);
+			String response = DBUtil.list(c);
+			this.c.close();
+            return response;
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
