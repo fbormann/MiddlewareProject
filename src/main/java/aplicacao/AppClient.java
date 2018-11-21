@@ -9,14 +9,14 @@ import java.util.Scanner;
 public class AppClient implements IClient {
 	static EstoqueProxy proxy;
 	
-	public AppClient(){
-//		proxy = new EstoqueProxy("localhost", 2000, 1234);
+	public AppClient() throws Exception {
+		NamingProxy namingProxy = new NamingProxy("localhost", 2224);
+		proxy = (EstoqueProxy) namingProxy.lookUp("Estoque");
 	}
 	
 	public static void main(String[] args) {
 		try {
-			NamingProxy namingProxy = new NamingProxy("localhost", 2224);
-			proxy = (EstoqueProxy) namingProxy.lookUp("Estoque");
+
 
 			Authentication auth = new Authentication();
 			int state = MenuStateMachine.MENU_STATE;

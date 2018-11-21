@@ -42,13 +42,7 @@ public class ServerRequestHandler implements IRequestHandler {
 		} // while 
 		return baos.toByteArray();
 	}
-	
-	public String[] receiveAsStringArray() throws Exception{
-		byte[] data = receive();
-		String fullCommand = new String(data);
-		return fullCommand.split(" ");
-	}
-	
+
 	public void closeConnection() throws IOException {
 		System.out.println("server fechou");
 		socket.close();
