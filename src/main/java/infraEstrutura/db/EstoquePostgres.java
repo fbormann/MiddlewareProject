@@ -44,6 +44,12 @@ public class EstoquePostgres {
 		} catch ( Exception e ) {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			System.exit(0);
+		} finally {
+			try {
+				this.c.close();
+			} catch (Exception e) {
+				System.out.println("closed connection");
+			}
 		}
 	}
 	
@@ -63,6 +69,7 @@ public class EstoquePostgres {
             	response = DBUtil.insert(c, produto);
             }
             qtd = DBUtil.getQtd(c, produto);
+            this.c.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

@@ -10,7 +10,7 @@ import main.java.infraEstrutura.IClient;
 
 public class Benchmark {
 	public static void test(BufferedWriter writer, IClient client) throws Exception {
-		int[] executionAmount = new int[] {50000};
+		int[] executionAmount = new int[] {100000};
 		long start;
 		long end;
 		long duration;
@@ -31,7 +31,7 @@ public class Benchmark {
 	}
 
 	public static void main(String[] args) {
-		int amount = 50000;
+		int amount = 100000;
 		String filename = "middleware_" + amount + ".txt";
 		Path testPath = Paths.get(filename);
 		
