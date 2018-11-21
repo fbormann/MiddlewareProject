@@ -17,7 +17,7 @@ public class Benchmark {
 		for (int i = 0; i < executionAmount.length; i++) {
 			for (int j = 0; j < executionAmount[i];j++) {
 				start = System.nanoTime();
-				client.add("new_item");
+				client.add("new_item", "admin");
 				end = System.nanoTime();
 				duration = end - start;
 				if (duration > 0L) {
