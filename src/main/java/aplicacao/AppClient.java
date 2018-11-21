@@ -14,8 +14,9 @@ public class AppClient implements IClient {
 
 	public AppClient() throws Exception {
 		System.out.println("app client instanciated");
-		NamingProxy namingProxy = new NamingProxy("naming_server", 2224);
-		// Add Naming-Server as a docker service (Don't know how to call it)
+//		NamingProxy namingProxy = new NamingProxy("localhost", 2224);
+        NamingProxy namingProxy = new NamingProxy("naming_server", 2224);
+//		 Add Naming-Server as a docker service (Don't know how to call it)
 		proxy = (EstoqueProxy) namingProxy.lookUp("Estoque");
 		System.out.println("connected to server, host: " + proxy.getHost() + " port: " + proxy.getPort() +
                 " objectId: " + proxy.getObjectId());

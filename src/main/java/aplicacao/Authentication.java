@@ -8,10 +8,12 @@ import java.sql.Statement;
 import java.util.Properties;
 
 public class Authentication {
-	//public static final String POSTGRES_URL = "jdbc:postgresql://localhost/postgres";
+//	public static final String POSTGRES_URL = "jdbc:postgresql://localhost/postgres";
 	public static final String POSTGRES_URL = "jdbc:postgresql://db:5432/postgres";
-	public static final String ADMIN = "postgres";
-	public static final String PASSWORD = "admin";
+
+	//Debug keys
+	public static String ADMIN;
+	public static String PASSWORD;
 	
 	Connection c;
 	Statement stmt;
@@ -19,7 +21,8 @@ public class Authentication {
 	public Authentication() {
 		this.c = null;
 		this.stmt = null;
-
+        ADMIN = Environment.getInstance().getLoginDbKey();
+        PASSWORD = Environment.getInstance().getPasswordDbKey();
 		try {
 			Class.forName("org.postgresql.Driver");
 			
