@@ -8,8 +8,8 @@ import java.sql.Statement;
 import java.util.Properties;
 
 public class Authentication {
-	public static final String POSTGRES_URL = "jdbc:postgresql://localhost/postgres";
-//	public static final String POSTGRES_URL = "jdbc:postgresql://db:5432/postgres";
+	//public static final String POSTGRES_URL = "jdbc:postgresql://localhost/postgres";
+	public static final String POSTGRES_URL = "jdbc:postgresql://db:5432/postgres";
 	public static final String ADMIN = "postgres";
 	public static final String PASSWORD = "admin";
 	
@@ -66,12 +66,13 @@ public class Authentication {
 	
 	public boolean signup(String login, String password, String usertype) throws SQLException {
 		this.c = this.getConnection();
+		System.out.println("got connection from database");
 		this.stmt = this.c.createStatement();
 
 		String sql = "INSERT INTO USERS (login, password, usertype) VALUES\n" +
 				"  (lower('"+ login +"'), crypt('"+ password +"', gen_salt('bf', 8)), lower('"+usertype+"'));";
 		int response = this.stmt.executeUpdate(sql);
-		
+		System.out.println("Received a response from signup on database");
 		stmt.close();
 		c.close();	
 		return response > 0;

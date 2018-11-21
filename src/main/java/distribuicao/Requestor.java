@@ -43,6 +43,8 @@ public class Requestor {
                 crh.closeConnection();
             } catch (IOException e) {
 //                System.out.println("Client lost connection, message may not been sent succefully");
+//                System.out.println("Client lost connection, message may not been sent succefully");
+                e.printStackTrace(System.out);
                 Thread.sleep(2*1000);
             }
         }

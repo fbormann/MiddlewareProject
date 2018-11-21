@@ -13,10 +13,12 @@ public class AppClient implements IClient {
     static boolean signin, loggedin;
 
 	public AppClient() throws Exception {
-		NamingProxy namingProxy = new NamingProxy("localhost", 2224);
+		System.out.println("app client instanciated");
+		NamingProxy namingProxy = new NamingProxy("naming_server", 2224);
 		// Add Naming-Server as a docker service (Don't know how to call it)
-//        NamingProxy namingProxy = new NamingProxy("Naming-Server", 2224);
 		proxy = (EstoqueProxy) namingProxy.lookUp("Estoque");
+		System.out.println("connected to server, host: " + proxy.getHost() + " port: " + proxy.getPort() +
+                " objectId: " + proxy.getObjectId());
 	}
 
 	public static void main(String[] args) {
@@ -71,14 +73,13 @@ public class AppClient implements IClient {
                                 System.out.println("1. try again");
                                 int choice = sc.nextInt();
                                 if (choice != 1) {
-                                    state = 0;
+                                    state = 2;
                                 }
                             } else {
                                 state = MenuStateMachine.EXIT_STATE;
                             }
                             break;
                         case MenuStateMachine.MENU_STATE:
-                        default:
                             System.out.println("Choose what you want to do");
                             System.out.println("0. sign up");
                             System.out.println("1. login");

@@ -21,14 +21,17 @@ public class NamingInvoker {
 			String serviceName = null;
 			ClientProxy clientProxy = null;
 
+			System.out.println("received an operation");
 			switch (operation) {
 				case "bind":
 					serviceName = (String) messageUnmarshalled.getParameters().get(0);
+					System.out.println("received bind call to service: " + serviceName);
 					clientProxy = (ClientProxy) messageUnmarshalled.getParameters().get(1);
 					impl.bind(serviceName, clientProxy);
 					break;
 				case "lookUp":
 					serviceName = (String) messageUnmarshalled.getParameters().get(0);
+					System.out.println("received lookup call to service: " + serviceName);
 					clientProxy = impl.lookUp(serviceName);
 					messageUnmarshalled.setOperationResult(clientProxy);
 					byte[] messageMarshalled = marshaller.marshall(messageUnmarshalled);
