@@ -10,6 +10,7 @@ import main.java.infraEstrutura.ClientRequestHandler;
 
 public class Requestor {
 	public Termination invoke(Invocation inv) throws Exception{
+		System.out.println("Message being sent to: " + "host: "+ inv.getHost() + "port: " + inv.getPort());
 		IRequestHandler crh = new ClientRequestHandler(inv.getHost(), inv.getPort());
 		crh.create();
 

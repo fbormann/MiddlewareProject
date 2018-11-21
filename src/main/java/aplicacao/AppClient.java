@@ -10,10 +10,10 @@ public class AppClient implements IClient {
 	static EstoqueProxy proxy;
 	
 	public AppClient() throws Exception {
-		NamingProxy namingProxy = new NamingProxy("localhost", 2224);
+		NamingProxy namingProxy = new NamingProxy("server", 2224);
 		proxy = (EstoqueProxy) namingProxy.lookUp("Estoque");
 	}
-	
+
 	public static void main(String[] args) {
 		try {
 
@@ -81,6 +81,7 @@ public class AppClient implements IClient {
 			System.out.println("Running the client app");
 			while(true){
 				String msg = scanner.nextLine();
+				System.out.println("msg: " + msg);
 				String[] msgArray = msg.split(" ");
 				switch (msgArray[0]) {
 				case "add":

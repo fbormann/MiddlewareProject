@@ -34,6 +34,7 @@ public class ClientRequestHandler implements IRequestHandler {
 	
 	@Override
 	public void send(byte[] data) throws Exception {
+		System.out.println("data sent through request handler");
 		socketOut.write(data);
 		socketOut.flush();
 	}
