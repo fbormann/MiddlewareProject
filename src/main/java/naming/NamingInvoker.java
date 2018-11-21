@@ -35,7 +35,7 @@ public class NamingInvoker {
 					srh.send(messageMarshalled);
 					break;
 				default:
-					System.out.println("Case not expected in NamingInvoker");
+//					System.out.println("Case not expected in NamingInvoker");
 					break;
 			}
 		}

@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class Invoker {
 	public void invoke(ClientProxy client) throws Exception {
-		System.out.println("Running...");
+//		System.out.println("Running...");
 
 		Marshaller marshaller = new Marshaller();
 		ICripto cripto = new Cripto();
@@ -25,7 +25,7 @@ public class Invoker {
 		while(true) {
 			try {
 				srh.create();
-				System.out.println("Running loop...");
+//				System.out.println("Running loop...");
 				byte[] msgToBeUncripted = srh.receive();
 				byte[] msgToBeUnmarshalled = cripto.decript(msgToBeUncripted);
 				msgUncripted = (Message) marshaller.unmarshall(msgToBeUnmarshalled);
@@ -38,7 +38,7 @@ public class Invoker {
 						termination.setResult(result);
 						reply = new Message(0, null, null, termination.getResult());
 						srh.send(marshaller.marshall(reply));
-						System.out.println("sent response");
+//						System.out.println("sent response");
 						break;
 					case "remove":
 						item = (String) msgUncripted.getParameters().get(0);
@@ -46,19 +46,19 @@ public class Invoker {
 						termination.setResult(result);
 						reply = new Message(0, null, null, termination.getResult());
 						srh.send(marshaller.marshall(reply));
-						System.out.println("sent response");
+//						System.out.println("sent response");
 						break;
 					case "list":
 						result = estoque.getAll();
 						termination.setResult(result);
 						reply = new Message(0, null, null, termination.getResult());
 						srh.send(marshaller.marshall(reply));
-						System.out.println("sent response");
+//						System.out.println("sent response");
 						break;
 				}
 				srh.closeConnection();
 			} catch (Exception e) {
-                System.out.println("Server lost connection");
+//                System.out.println("Server lost connection");
 			}
 		}
 	}

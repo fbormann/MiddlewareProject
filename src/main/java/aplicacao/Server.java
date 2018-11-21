@@ -8,7 +8,7 @@ import main.java.naming.NamingProxy;
 
 public class Server {
 	public static void main(String[] args) {
-		System.out.println("Running the server app");
+//		System.out.println("Running the server app");
 		try {
 			NamingProxy namingProxy = new NamingProxy("localhost", 2224);
 			Invoker inv = new Invoker();

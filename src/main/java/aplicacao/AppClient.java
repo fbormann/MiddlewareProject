@@ -3,7 +3,6 @@ package main.java.aplicacao;
 import main.java.distribuicao.EstoqueProxy;
 import main.java.infraEstrutura.IClient;
 import main.java.naming.NamingProxy;
-import org.postgresql.util.PSQLException;
 
 import java.util.Scanner;
 
@@ -101,10 +100,10 @@ public class AppClient implements IClient {
                 System.out.println();
                 AppClient client = new AppClient();
                 Scanner scanner = new Scanner(System.in);
-                System.out.println("Running the client app");
+//                System.out.println("Running the client app");
                 while(loggedin){
                     String msg = scanner.nextLine();
-                    System.out.println("msg: " + msg);
+//                    System.out.println("msg: " + msg);
                     String[] msgArray = msg.split(" ");
                     switch (msgArray[0]) {
                         case "add":
@@ -121,7 +120,7 @@ public class AppClient implements IClient {
                             state = MenuStateMachine.MENU_STATE;
                             break;
                         default:
-                            System.out.println("Invalid command. Try 'add {item}', 'remove {item}', 'list' or 'logout'");
+//                            System.out.println("Invalid command. Try 'add {item}', 'remove {item}', 'list' or 'logout'");
                             break;
                     }
                 }

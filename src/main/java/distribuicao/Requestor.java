@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class Requestor {
 	public Termination invoke(Invocation inv) throws Exception{
-		System.out.println("Message being sent to: " + "host: "+ inv.getHost() + "port: " + inv.getPort());
+//		System.out.println("Message being sent to: " + "host: "+ inv.getHost() + "port: " + inv.getPort());
 		IRequestHandler crh = new ClientRequestHandler(inv.getHost(), inv.getPort());
         Termination termination = new Termination(null);
         boolean msgSentSuccessfully = false;
@@ -21,7 +21,7 @@ public class Requestor {
 		long timeStarted = System.currentTimeMillis();
 		while(timeElapsed < timeout && !msgSentSuccessfully) {
             timeElapsed = System.currentTimeMillis() - timeStarted;
-            System.out.println("timeElapsed: "+timeElapsed);
+//            System.out.println("timeElapsed: "+timeElapsed);
             try {
                 crh.create();
 
@@ -34,7 +34,7 @@ public class Requestor {
                 crh.send(cripted);
                 byte[] response = crh.receive();
                 if (response == null) {
-                    System.out.println("Server lost connection. Retrying");
+//                    System.out.println("Server lost connection. Retrying");
                     Thread.sleep(2*1000);
                 } else {
                     termination.setResult(marshaller.unmarshall(response));
@@ -42,7 +42,7 @@ public class Requestor {
                 }
                 crh.closeConnection();
             } catch (IOException e) {
-                System.out.println("Client lost connection, message may not been sent succefully");
+//                System.out.println("Client lost connection, message may not been sent succefully");
                 Thread.sleep(2*1000);
             }
         }

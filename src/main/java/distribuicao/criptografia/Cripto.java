@@ -61,24 +61,5 @@ public class Cripto implements ICripto {
 		
 		return decrypted;
 	}
-	
-	public static void main(String args[]) {
-		
-		try {
-			Cripto cripto = new Cripto();
-			String oi = "oi";
-			ArrayList<Object> array = new ArrayList<>();
-			array.add(oi);
-			Message msg = new Message(0, "add", array, null);
-			Marshaller mar = new Marshaller();
-			
-			System.out.println("com marshaller com message");
-			byte[] cripted = cripto.encript(mar.marshall(msg));
-			String out = (String) ((Message)mar.unmarshall(cripto.decript(cripted))).getParameters().get(0);
-			System.out.println(out);
-		} catch (ClassNotFoundException | GeneralSecurityException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+
 }

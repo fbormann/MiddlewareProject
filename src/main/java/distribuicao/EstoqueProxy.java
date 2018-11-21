@@ -57,17 +57,12 @@ public class EstoqueProxy extends ClientProxy implements IEstoque {
 	}
 
 	private boolean checkAcessControl(String command, String usertype) {
-        System.out.println("Check acess control");
-        System.out.println("Command="+command);
-        System.out.println("type="+usertype);
-	    if(usertype.equalsIgnoreCase("manager") &&
+        if(usertype.equalsIgnoreCase("manager") &&
 				command.equalsIgnoreCase("remove")) {
-            System.out.println("if1");
-			return false;
+        	return false;
 		} else if(usertype.equalsIgnoreCase("seller") &&
 				command.equalsIgnoreCase("add")){
-            System.out.println("if2");
-	        return false;
+            return false;
 		} else {
 			return true;
 		}

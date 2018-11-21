@@ -17,7 +17,7 @@ public class ServerRequestHandler implements IRequestHandler {
 	
 	public void create() throws IOException{
 		socket = welcomeSocket.accept();
-    	System.out.println("Accepted.");
+//    	System.out.println("Accepted.");
     	socketOut = new DataOutputStream(socket.getOutputStream());
 	}
 
@@ -29,7 +29,7 @@ public class ServerRequestHandler implements IRequestHandler {
 
 	@Override
 	public byte[] receive() throws IOException{
-		System.out.println("trying to receive");
+//		System.out.println("trying to receive");
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();  
 		int bufferMaxSize = 1024;
 		byte[] content = new byte[ bufferMaxSize ];  
@@ -42,7 +42,7 @@ public class ServerRequestHandler implements IRequestHandler {
 	}
 
 	public void closeConnection() throws IOException {
-		System.out.println("server fechou");
+//		System.out.println("server fechou");
 		socket.close();
 		socketOut.close();
 	}

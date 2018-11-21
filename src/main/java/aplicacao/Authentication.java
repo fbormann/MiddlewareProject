@@ -70,7 +70,6 @@ public class Authentication {
 
 		String sql = "INSERT INTO USERS (login, password, usertype) VALUES\n" +
 				"  (lower('"+ login +"'), crypt('"+ password +"', gen_salt('bf', 8)), lower('"+usertype+"'));";
-        System.out.println(sql);
 		int response = this.stmt.executeUpdate(sql);
 		
 		stmt.close();

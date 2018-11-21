@@ -28,14 +28,14 @@ public class ClientRequestHandler implements IRequestHandler {
 	
 	@Override
 	public void send(byte[] data) throws IOException {
-		System.out.println("data sent through request handler");
+//		System.out.println("data sent through request handler");
 		socketOut.write(data);
 		socketOut.flush();
 	}
 
 	@Override
 	public byte[] receive() throws IOException {
-		System.out.println("trying to receive client");
+//		System.out.println("trying to receive client");
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		int bufferMaxSize = 1024;
 		byte[] content = new byte[ bufferMaxSize ];  
@@ -60,7 +60,7 @@ public class ClientRequestHandler implements IRequestHandler {
     }
 
 	public void closeConnection() throws IOException{
-		System.out.println("cliente fechou");
+//		System.out.println("cliente fechou");
 		socket.close();
 		socketOut.close();
 	}
