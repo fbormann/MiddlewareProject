@@ -46,7 +46,7 @@ public class EstoqueProxy extends ClientProxy implements IEstoque {
 		}
 
 		Message responseMessage = ((Message) result.getResult());
-		if(responseMessage.getOperationResult() == null) {
+		if(responseMessage == null || responseMessage.getOperationResult() == null) {
 			return "Mensagem vazia";
 		} else {
 			return responseMessage.getOperationResult().toString();

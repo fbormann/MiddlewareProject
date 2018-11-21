@@ -10,15 +10,15 @@ public class AppClient implements IClient {
 	static EstoqueProxy proxy;
 	
 	public AppClient() throws Exception {
-		NamingProxy namingProxy = new NamingProxy("server", 2224);
+//		NamingProxy namingProxy = new NamingProxy("localhost", 2224);
+		// Add Naming-Server as a docker service (Don't know how to call it)
+        NamingProxy namingProxy = new NamingProxy("Naming-Server", 2224);
 		proxy = (EstoqueProxy) namingProxy.lookUp("Estoque");
 	}
 
 	public static void main(String[] args) {
 		try {
-
-
-			Authentication auth = new Authentication();
+            Authentication auth = new Authentication();
 			int state = MenuStateMachine.MENU_STATE;
 			String login, password;
 			boolean signin, loggedin;
@@ -93,13 +93,13 @@ public class AppClient implements IClient {
 				case "list":
 					client.list();
 				default:
+                    System.out.println("Invalid command. Try 'add {item}', 'remove {item}' or 'list'");
 					break;
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+            e.printStackTrace();
+        }
 	}
 
 	@Override
