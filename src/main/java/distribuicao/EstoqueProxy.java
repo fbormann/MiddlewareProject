@@ -17,21 +17,24 @@ public class EstoqueProxy extends ClientProxy implements IEstoque {
 	}
 
 	@Override
-	public String add(String item) throws RemoteException {
-		return sendCommand("add", item);
+	public String add(String item, String usertype) throws RemoteException {
+		return sendCommand("add", item, usertype);
 	}
 
 	@Override
-	public String remove(String item) throws RemoteException {
-		return sendCommand("remove", item);
+	public String remove(String item, String usertype) throws RemoteException {
+		return sendCommand("remove", item, usertype);
 	}
 
 	@Override
-	public String getAll() throws RemoteException {
-		return sendCommand("list", null);
+	public String getAll(String usertype) throws RemoteException {
+		return sendCommand("list", null, usertype);
 	}
 	
-	public String sendCommand(String command, String item) {
+	public String sendCommand(String command, String item, String usertype) {
+	    if(!checkAcessControl(command, usertype)){
+	        return "Invalid action for "+usertype+"-user";
+        }
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(item);
 		System.out.println("Invocation sent");
@@ -51,6 +54,22 @@ public class EstoqueProxy extends ClientProxy implements IEstoque {
 		} else {
 			return responseMessage.getOperationResult().toString();
 		}
-		
+	}
+
+	private boolean checkAcessControl(String command, String usertype) {
+        System.out.println("Check acess control");
+        System.out.println("Command="+command);
+        System.out.println("type="+usertype);
+	    if(usertype.equalsIgnoreCase("manager") &&
+				command.equalsIgnoreCase("remove")) {
+            System.out.println("if1");
+			return false;
+		} else if(usertype.equalsIgnoreCase("seller") &&
+				command.equalsIgnoreCase("add")){
+            System.out.println("if2");
+	        return false;
+		} else {
+			return true;
+		}
 	}
 }

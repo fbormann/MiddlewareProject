@@ -31,7 +31,6 @@ public class Requestor {
                 Message msgToBeMarshalled = new Message(0, inv.getOperation(), inv.getParameters(), null);
                 byte[] msgToBeCripted = marshaller.marshall(msgToBeMarshalled);
                 byte[] cripted = cripto.encript(msgToBeCripted);
-                crh.closeConnection();
                 crh.send(cripted);
                 byte[] response = crh.receive();
                 if (response == null) {
