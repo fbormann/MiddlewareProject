@@ -67,6 +67,7 @@ public class EstoquePostgres {
             	response = DBUtil.insert(c, produto);
             }
             qtd = DBUtil.getQtd(c, produto);
+			this.c.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -92,6 +93,7 @@ public class EstoquePostgres {
             } else {
                 return "Produto " + produto + " nao esta cadastrado";
             }
+			this.c.close();
        } catch (Exception e) {
             // TODO: handle exception
         	e.printStackTrace();
@@ -107,7 +109,9 @@ public class EstoquePostgres {
 	public String getAll() {
 		try {
 			this.c = this.getConnection(false);
-            return DBUtil.list(c);
+			String response = DBUtil.list(c);
+			this.c.close();
+            return response;
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
