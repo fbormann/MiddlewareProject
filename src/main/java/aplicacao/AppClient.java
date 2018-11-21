@@ -10,7 +10,7 @@ public class AppClient implements IClient {
 	static EstoqueProxy proxy;
 	
 	public AppClient() throws Exception {
-		NamingProxy namingProxy = new NamingProxy("server", 2224);
+		NamingProxy namingProxy = new NamingProxy("localhost", 2224);
 		proxy = (EstoqueProxy) namingProxy.lookUp("Estoque");
 	}
 
