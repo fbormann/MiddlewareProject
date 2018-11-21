@@ -10,8 +10,10 @@ public class AppClient implements IClient {
 	static EstoqueProxy proxy;
 	
 	public AppClient() throws Exception {
-		NamingProxy namingProxy = new NamingProxy("server", 2224);
+		System.out.println("app client instanciated");
+		NamingProxy namingProxy = new NamingProxy("naming_server", 2224);
 		proxy = (EstoqueProxy) namingProxy.lookUp("Estoque");
+		System.out.println("connected to server");
 	}
 
 	public static void main(String[] args) {
@@ -56,14 +58,14 @@ public class AppClient implements IClient {
 							System.out.println("1. try again");
 							int choice = sc.nextInt();
 							if (choice != 1) {
-								state = 0;
+								state = 2;
 							}
 						} else {
+							System.out.println("exit state after logged in");
 							state = MenuStateMachine.EXIT_STATE;
 						}
 						break;
 					case MenuStateMachine.MENU_STATE:
-					default:
 						System.out.println("Choose what you want to do");
 						System.out.println("0. sign up");
 						System.out.println("1. login");
@@ -75,7 +77,7 @@ public class AppClient implements IClient {
 						break;
 				}
 			}
-			System.out.println();
+			System.out.println("Inside app client, authenticated user");
 			AppClient client = new AppClient();
 			Scanner scanner = new Scanner(System.in);
 			System.out.println("Running the client app");

@@ -65,12 +65,13 @@ public class Authentication {
 	
 	public boolean signup(String login, String password) throws SQLException {
 		this.c = this.getConnection();
+		System.out.println("got connection from database");
 		this.stmt = this.c.createStatement();
 
 		String sql = "INSERT INTO USERS (login, password) VALUES\n" + 
 				"  (lower('"+ login +"'), crypt('"+ password +"', gen_salt('bf', 8)));";
 		int response = this.stmt.executeUpdate(sql);
-		
+		System.out.println("Received a response from signup on database");
 		stmt.close();
 		c.close();	
 		return response > 0;

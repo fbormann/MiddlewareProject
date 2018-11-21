@@ -23,7 +23,9 @@ public class NamingProxy implements INaming {
 
 	@Override
 	public void bind(String serviceName, ClientProxy clientProxy) throws Exception {
+		System.out.println("trying to create connection");
 		this.clientRequestHandler.create();
+		System.out.println("connection created");
 		String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
 		List<Object> parameters = new ArrayList<>();
 		parameters.add(serviceName);
@@ -33,6 +35,7 @@ public class NamingProxy implements INaming {
 		Marshaller marshaller = new Marshaller();
 		byte[] messageMarshalled = marshaller.marshall(message);
 		this.clientRequestHandler.send(messageMarshalled);
+		System.out.println("Send bind requisition for service: "+ serviceName);
 		this.clientRequestHandler.closeConnection();
 	}
 

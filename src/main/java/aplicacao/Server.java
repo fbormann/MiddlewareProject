@@ -10,10 +10,13 @@ public class Server {
 	public static void main(String[] args) {
 		System.out.println("Running the server app");
 		try {
-			NamingProxy namingProxy = new NamingProxy("localhost", 2224);
+			NamingProxy namingProxy = new NamingProxy("naming_server", 2224);
+			System.out.println("Found client app on naming server");
 			Invoker inv = new Invoker();
-			ClientProxy proxy = new EstoqueProxy("localhost", 2000, 1234);
+			ClientProxy proxy = new EstoqueProxy("client", 2000, 1234);
+			System.out.println("connect to client proxy");
 			namingProxy.bind("Estoque", proxy);
+			System.out.println("Bind to client app");
 			inv.invoke(proxy);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
