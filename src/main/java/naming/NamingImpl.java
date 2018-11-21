@@ -19,6 +19,7 @@ public class NamingImpl implements INaming {
 
 	@Override
 	public void bind(String service, ClientProxy proxy) throws ClassNotFoundException, IOException {
+		System.out.println("bind on Impl (bind): " + proxy.getHost());
 		if (this.lookUpTable.containsKey(service)) {
 			this.lookUpTable.get(service).addLast(proxy);
 		} else {
@@ -31,6 +32,7 @@ public class NamingImpl implements INaming {
 	@Override
 	public ClientProxy lookUp(String service) throws Exception {
 		ClientProxy proxy = this.lookUpTable.get(service).getFirst();
+		System.out.println("lookup on Impl (lookup): " + proxy.getHost());
 		this.lookUpTable.get(service).removeFirst();
 		this.lookUpTable.get(service).addLast(proxy);
 		return proxy;

@@ -13,10 +13,9 @@ public class Server {
 			NamingProxy namingProxy = new NamingProxy("naming_server", 2224);
 			System.out.println("Found client app on naming server");
 			Invoker inv = new Invoker();
-			ClientProxy proxy = new EstoqueProxy("client", 2000, 1234);
-			System.out.println("connect to client proxy");
+			ClientProxy proxy = new EstoqueProxy("server", 2000, 1234);
+			System.out.println("Client proxy created, host: " + proxy.getHost());
 			namingProxy.bind("Estoque", proxy);
-			System.out.println("Bind to client app");
 			inv.invoke(proxy);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

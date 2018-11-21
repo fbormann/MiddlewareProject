@@ -31,7 +31,8 @@ public class Authentication {
 			
 			String sql = "CREATE TABLE IF NOT EXISTS USERS " +
 					"(LOGIN TEXT PRIMARY KEY NOT NULL," +
-					"PASSWORD TEXT NOT NULL);"; 
+					"PASSWORD TEXT NOT NULL," +
+                    "USERTYPE TEXT NOT NULL);";
 			this.stmt.executeUpdate(sql);
 			
 			this.stmt.close();
@@ -63,13 +64,14 @@ public class Authentication {
 		return result;
 	}
 	
-	public boolean signup(String login, String password) throws SQLException {
+	public boolean signup(String login, String password, String usertype) throws SQLException {
 		this.c = this.getConnection();
 		System.out.println("got connection from database");
 		this.stmt = this.c.createStatement();
 
-		String sql = "INSERT INTO USERS (login, password) VALUES\n" + 
-				"  (lower('"+ login +"'), crypt('"+ password +"', gen_salt('bf', 8)));";
+		String sql = "INSERT INTO USERS (login, password, usertype) VALUES\n" +
+				"  (lower('"+ login +"'), crypt('"+ password +"', gen_salt('bf', 8)), lower('"+usertype+"'));";
+        System.out.println(sql);
 		int response = this.stmt.executeUpdate(sql);
 		System.out.println("Received a response from signup on database");
 		stmt.close();
@@ -77,7 +79,7 @@ public class Authentication {
 		return response > 0;
 	}
 	
-	public boolean signin(String login, String password) throws SQLException {
+	public String signin(String login, String password) throws SQLException {
 		this.c = this.getConnection();
 		this.stmt = this.c.createStatement();
 
@@ -85,18 +87,20 @@ public class Authentication {
 				"  login = lower('"+ login +"') AND password=crypt('"+ password +
 				"', password);";
 		ResultSet rs = this.stmt.executeQuery(sql);
-		boolean result = rs.next();
-		
+		String type = null;
+		if(rs.next()) {
+		    type = rs.getString("usertype");
+        }
 		stmt.close();
 		c.close();
-		return result;
+		return type;
 	}
 	
 	public static void main(String[] args) {
 		Authentication auth = new Authentication();
 		
 		try {
-			//auth.signup("root", "password");
+			//auth.signup("root", "password", "admin");
 			System.out.println(auth.signin("admin", "admin"));
 			System.out.println(auth.signin("root", "password"));
 			
