@@ -1,5 +1,7 @@
 package main.java.infraEstrutura.db;
 
+import main.java.aplicacao.Environment;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,18 +14,20 @@ public class EstoquePostgres {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public static final String POSTGRES_URL = "jdbc:postgresql://localhost/postgres";
-//	public static final String POSTGRES_URL = "jdbc:postgresql://db:5432/postgres";
-	public static final String ADMIN = "postgres";
-	public static final String PASSWORD = "admin";
-	
+//	public static final String POSTGRES_URL = "jdbc:postgresql://localhost/postgres";
+	public static final String POSTGRES_URL = "jdbc:postgresql://db:5432/postgres";
+
+    public static String ADMIN;
+    public static String PASSWORD;
+
 	Connection c;
 	Statement stmt;
 	
 	public EstoquePostgres() {
 		this.c = null;
 		this.stmt = null;
-
+        ADMIN = Environment.getInstance().getLoginDbKey();
+        PASSWORD = Environment.getInstance().getPasswordDbKey();
 		try {
 			Class.forName("org.postgresql.Driver");
 			

@@ -1,5 +1,6 @@
 package main.java.distribuicao.criptografia;
 
+import main.java.aplicacao.Environment;
 import main.java.distribuicao.message.Message;
 
 import javax.crypto.BadPaddingException;
@@ -18,9 +19,7 @@ import java.util.Arrays;
 
 
 public class Cripto implements ICripto {
-	
-	private String key = "marflksdomnhtklq"; // Usando chave de 128-bits (16 bytes)
-	
+
 	public byte[] getKey(String myKey){
         MessageDigest sha = null;
         byte[] key=null;
@@ -43,7 +42,7 @@ public class Cripto implements ICripto {
 			NoSuchAlgorithmException, NoSuchPaddingException, IOException, ClassNotFoundException {
 
 		Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
-
+		String key = Environment.getInstance().getCriptoKey();
 		byte[] keyBytes = getKey(key);
 
 		cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(keyBytes, "AES"));
@@ -54,6 +53,7 @@ public class Cripto implements ICripto {
 	public byte[] decript(byte[] cripted) throws GeneralSecurityException, NoSuchPaddingException, IOException, ClassNotFoundException {
 
 		Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+		String key = Environment.getInstance().getCriptoKey();
 		byte[] keyBytes = getKey(key);
 		cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(keyBytes, "AES"));
 		
